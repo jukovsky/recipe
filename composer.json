@@ -1,0 +1,19 @@
+{
+    "name": "rzhukovskiy/recipe",
+    "description": "Tiny lirary implementing middleware concept",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rzhukovskiy\\Recipe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rzhukovskiy",
+            "email": "zhukovskey@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
