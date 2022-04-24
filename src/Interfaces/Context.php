@@ -2,6 +2,8 @@
 
 namespace Rzhukovskiy\Recipe\Interfaces;
 
+use Rzhukovskiy\Recipe\Exceptions\ArgumentNotExistException;
+
 interface Context
 {
     /**
@@ -29,4 +31,11 @@ interface Context
      * @return void
      */
     public function reset(): void;
+
+    /**
+     * @param array $args
+     * @return array
+     * @throws ArgumentNotExistException
+     */
+    public function getInputsByArgs(array $args): array;
 }

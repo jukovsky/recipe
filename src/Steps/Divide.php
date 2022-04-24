@@ -12,20 +12,7 @@ final class Divide extends AbstractMathStep
      */
     public function do(Context $context, Closure $next): Context
     {
-        [$numerator, $denominator] = $this->getArgs();
-
-        $numerator = match ($numerator[0]) {
-            'input' => $context->getInputs()[$numerator[1]],
-            'result' => $context->getResults()[$numerator[1]],
-            default => $numerator[0],
-        };
-
-        $denominator = match ($denominator[0]) {
-            'input' => $context->getInputs()[$denominator[1]],
-            'result' => $context->getResults()[$denominator[1]],
-            default => $denominator[0],
-        };
-
+        [$numerator, $denominator] = $context->getInputsByArgs($this->getArgs());
         $context->addResult($numerator / $denominator);
 
         return $next($context);

@@ -6,13 +6,22 @@ use Rzhukovskiy\Recipe\Interfaces\RecipeFactory;
 
 final class PhpRecipeFactory implements RecipeFactory
 {
+    /**
+     * @var array|mixed
+     */
     private array $config;
 
-    public function __construct($file)
+    /**
+     * @param string $file
+     */
+    public function __construct(string $file)
     {
         $this->config = include($file);
     }
 
+    /**
+     * @return Recipe
+     */
     public function make(): Recipe
     {
         $recipe = new WaterfallRecipe(new ArrayContext($this->config['inputs']));

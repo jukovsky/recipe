@@ -1,6 +1,8 @@
 <?php
 namespace Rzhukovskiy\Recipe\Interfaces;
 
+use Rzhukovskiy\Recipe\Exceptions\EmptyRecipeException;
+
 interface Recipe
 {
     /**
@@ -15,6 +17,7 @@ interface Recipe
 
     /**
      * @return Context
+     * @throws EmptyRecipeException
      */
     public function cook(): Context;
 }

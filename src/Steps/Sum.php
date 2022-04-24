@@ -13,14 +13,8 @@ final class Sum extends AbstractMathStep
     public function do(Context $context, Closure $next): Context
     {
         $res = 0;
-        foreach ($this->getArgs() as $inputArray) {
-            $inputArray[] = null;
-            [$index, $value] = $inputArray;
-            $input = match ($index) {
-                'input' => $context->getInputs()[$value],
-                'result' => $context->getResults()[$value],
-                default => $index,
-            };
+        $inputs = $context->getInputsByArgs($this->getArgs());
+        foreach ($inputs as $input) {
             $res += $input;
         }
         $context->addResult($res);

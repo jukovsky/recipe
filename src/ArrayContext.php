@@ -2,6 +2,8 @@
 
 namespace Rzhukovskiy\Recipe;
 
+use Rzhukovskiy\Recipe\Exceptions\ArgumentNotExistException;
+
 class ArrayContext implements Interfaces\Context
 {
     /**
@@ -53,8 +55,44 @@ class ArrayContext implements Interfaces\Context
         return $this->inputs;
     }
 
+    /**
+     * @return void
+     */
     public function reset(): void
     {
         $this->results = [];
+    }
+
+    /**
+     * @param array $args
+     * @return array
+     * @throws ArgumentNotExistException
+     */
+    public function getInputsByArgs(array $args): array
+    {
+        $inputs = [];
+        foreach ($args as $inputArray) {
+            $inputArray[] = null;
+            [$index, $value] = $inputArray;
+            switch ($index) {
+                case 'input':
+                    if(!array_key_exists($value, $this->getInputs())) {
+                        throw new ArgumentNotExistException("input: $value");
+                    }
+                    $input = $this->getInputs()[$value];
+                    break;
+                case 'result':
+                    if(!array_key_exists($value, $this->getInputs())) {
+                        throw new ArgumentNotExistException("result: $value");
+                    }
+                    $input = $this->getInputs()[$value];
+                    break;
+                default:
+                    $input = $index;
+            }
+            $inputs[] = $input;
+        }
+
+        return $inputs;
     }
 }
