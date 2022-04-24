@@ -82,7 +82,7 @@ class ArrayContext implements Interfaces\Context
                     $input = $this->getInputs()[$value];
                     break;
                 case 'result':
-                    if(!array_key_exists($value, $this->getInputs())) {
+                    if(!array_key_exists($value, $this->getResults())) {
                         throw new ArgumentNotExistException("result: $value");
                     }
                     $input = $this->getInputs()[$value];
